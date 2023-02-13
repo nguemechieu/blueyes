@@ -1,0 +1,25 @@
+
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+[project]
+name = "Blueyes"
+version = "0.0.1"
+authors = [
+    { name="Nguemechieu noel", email="nnoelmartial@yahoo.fr" },
+]
+description = "Blueyes an investment and utility software develop to help and support investors and traders"
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/nguemechieu/blueyes"
+"Bug Tracker" = "https://github.com/nguemechieu/blueyes/issues"
+# Example Package
+
