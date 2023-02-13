@@ -1,1 +1,3 @@
-FROM ubuntu:latest-release
+FROM ubuntu:latest
+
+WORKDIR /Blueyes

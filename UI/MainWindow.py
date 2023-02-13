@@ -10,8 +10,6 @@ class MainWindow(object):
           window=tk.Tk()
           window.title("Blueyes")
           window.geometry("1500x700")
-          
-
           newlabel=tk.Label(text="Starting server now " + datetime.datetime.now().strftime("%Y-%m-%d %H:%d %M:%S %Z"))
           newlabel.grid(column=2,row=3)
 
