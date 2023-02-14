@@ -1,20 +1,29 @@
 import datetime
 import tkinter
-from idlelib import window
 from msilib import Dialog
-from tkinter import TOP
+from tkinter import TOP, dialog
 from tkinter.filedialog import Open, SaveAs
 from typing import Type
 
-from PIL.ImageWin import Window
+from pandas import options
+
+from Bueyes.src.BackEnd.Db import Db
 
 
 # create a database
 
 
 # create a window
+def get_open_data_folder() -> bool:
+    choice_box = tkinter.filedialog
+
+    return True
+
+
 def show(win_dow):
-    win_dow.iconbitmap('./src/UI/images/blueyes.ico')
+    win_dow.iconbitmap('./src/images/blueyes.ico')
+    db = Db
+    db.connect()
 
     menu_bar = tkinter.Menu(win_dow, border=30)
 
@@ -87,7 +96,8 @@ def show(win_dow):
 
     file_menu0.add_command(label="Open a new account")
     file_menu0.add_separator()
-    file_menu0.add_command(label="Open Data Folder", command='openDataFolder', image='', compound='left')
+    file_menu0.add_command(label="Open Data Folder",
+                           command=lambda: get_open_data_folder())
     file_menu0.add_separator()
     file_menu0.add_command(label="Print View")
     file_menu0.add_separator()

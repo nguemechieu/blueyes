@@ -11,7 +11,6 @@ def main() -> None:
     main_menu = MainWindow
     main_menu.MainWindow.show()
     logging.getLogger(__name__)
-
     return
 
 
