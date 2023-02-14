@@ -6,7 +6,8 @@ RUN echo "Welcome to Blueyes"
 RUN echo "--------------------------------"
 RUN echo "Now Installing Blueyes"
 RUN apt-get   update
-RUN docker pull mysql
+
+RUN apt-get install -y mysql
 RUN echo systemctl service mysql start
 COPY pyproject.toml pyproject.toml
 RUN echo "--------------------------------"
