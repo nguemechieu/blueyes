@@ -2,10 +2,8 @@ import datetime
 import tkinter
 from msilib import Dialog
 from tkinter import TOP, dialog
-from tkinter.filedialog import Open, SaveAs
+from tkinter.filedialog import SaveAs
 from typing import Type
-
-from pandas import options
 
 from Bueyes.src.BackEnd.Db import Db
 
@@ -20,6 +18,110 @@ def get_open_data_folder() -> bool:
     return True
 
 
+def print_view():
+    pass
+
+
+def remove():
+    pass
+
+
+def market_overview():
+    pass
+
+
+def save():
+    pass
+
+
+def open_dialog():
+    pass
+
+
+def login_to_trade():
+    pass
+
+
+def open_account():
+    pass
+
+
+def titel_window():
+    pass
+
+
+def title_window():
+    pass
+
+
+def title_horizontal_window():
+    pass
+
+
+def title_vertical_window():
+    pass
+
+
+def cascade_view_window():
+    pass
+
+
+def get_candle_stick_chart():
+    pass
+
+
+def get_foreground():
+    pass
+
+
+def get_bar_chart():
+    pass
+
+
+def get_timeframe():
+    pass
+
+
+def get_line_chart():
+    pass
+
+
+def get_template():
+    pass
+
+
+def get_properties():
+    pass
+
+
+def get_auto_scroll():
+    pass
+
+
+def get_awesome_oscillator():
+    pass
+
+
+def get_moving_average():
+    pass
+
+
+def get_bollinger_bands():
+    pass
+
+
+def get_sar():
+    pass
+
+
+def get_parabolic():
+    pass
+
+
+def get_rsi():
+    pass
+
+
 def show(win_dow):
     win_dow.iconbitmap('./src/images/blueyes.ico')
     db = Db
@@ -27,7 +129,7 @@ def show(win_dow):
 
     menu_bar = tkinter.Menu(win_dow, border=30)
 
-    case_panel = tkinter.PanedWindow(win_dow, border=100, background='brown', width=1000, height=700)
+    case_panel = tkinter.PanedWindow(win_dow, border=100, background='brown', width=1500, height=700)
 
     case_panel.pack()
 
@@ -73,47 +175,47 @@ def show(win_dow):
     profiles_menu0.add_separator()
     profiles_menu0.add_command(label="Previous")
     profiles_menu0.add_separator()
-    profiles_menu0.add_command(label="Save As")
-    file_menu0.add_command(label="Remove")
+    profiles_menu0.add_command(label="Save As", command=SaveAs)
+    file_menu0.add_command(label="Remove", command=lambda: remove())
     file_menu0.add_separator()
     file_menu0.add_command(label="Default")
     file_menu0.add_separator()
-    file_menu0.add_command(label="Market Overview")
+    file_menu0.add_command(label="Market Overview", command=lambda: market_overview())
     file_menu0.add_separator()
     file_menu0.add_command(label="Symbol Information")
     file_menu0.add_separator()
     file_menu0.add_cascade(label="Profiles", menu=profiles_menu0)
     file_menu0.add_separator()
 
-    file_menu0.add_command(label="Open ", command=Open)
+    file_menu0.add_command(label="Open ", command=lambda: open_dialog(), compound='left')
     file_menu0.add_separator()
-    file_menu0.add_command(label="Save ", command=SaveAs, compound='left')
+    file_menu0.add_command(label="Save ", command=lambda: save(), compound='left')
     file_menu0.add_separator()
-    file_menu0.add_command(label="Save As", command=SaveAs, compound='left')
+    file_menu0.add_command(label="Save As", command=lambda: SaveAs, compound='left')
     file_menu0.add_separator()
 
-    file_menu0.add_command(label="Login to Trade")
+    file_menu0.add_command(label="Login to Trade", command=lambda: login_to_trade(), compound='left')
 
-    file_menu0.add_command(label="Open a new account")
+    file_menu0.add_command(label="Open a new account", command=lambda: open_account(), compound='left')
     file_menu0.add_separator()
     file_menu0.add_command(label="Open Data Folder",
-                           command=lambda: get_open_data_folder())
+                           command=lambda: get_open_data_folder(), compound='left')
     file_menu0.add_separator()
-    file_menu0.add_command(label="Print View")
+    file_menu0.add_command(label="Print View", command=lambda: print_view(),compound='left')
     file_menu0.add_separator()
-    file_menu0.add_command(label="Exit", command=exit)
+    file_menu0.add_command(label="Exit", command=exit, compound='right')
 
     file_menu1 = tkinter.Menu(menu_bar, tearoff=0)
     menu_bar.add_cascade(label="View", menu=file_menu1)
-    file_menu1.add_command(label="New Window")
+    file_menu1.add_command(label="New Window", command=lambda: tkinter.PanedWindow())
     file_menu1.add_separator()
-    file_menu1.add_command(label="Titel Window")
+    file_menu1.add_command(label="Title Window", command=lambda: title_window())
     file_menu1.add_separator()
-    file_menu1.add_command(label="Title Horizontal Window")
+    file_menu1.add_command(label="Title Horizontal Window", command=lambda: title_horizontal_window())
     file_menu1.add_separator()
-    file_menu1.add_command(label="Title Vertical Window")
+    file_menu1.add_command(label="Title Vertical Window", command=lambda: title_vertical_window())
     file_menu1.add_separator()
-    file_menu1.add_command(label="Cascade View")
+    file_menu1.add_command(label="Cascade View", command=lambda: cascade_view_window())
 
     file_menu2 = tkinter.Menu(menu_bar, tearoff=0)
     menu_bar.add_cascade(label="Insert", menu=file_menu2)
@@ -126,54 +228,52 @@ def show(win_dow):
     indicator_menu.add_command(label="Average Directional Movement index")
     indicator_menu.add_command(label="CCI")
     indicator_menu.add_command(label="Average True Ranges")
-    indicator_menu.add_command(label="Awesome Oscillator")
+    indicator_menu.add_command(label="Awesome Oscillator", command=lambda: get_awesome_oscillator())
     indicator_menu.add_separator()
     trend_menu = tkinter.Menu(indicator_menu, tearoff=0)
 
-    trend_menu.add_command(label="Bollinger Bands")
-    trend_menu.add_command(label="Moving Average")
-    trend_menu.add_command(label="SAR")
-    trend_menu.add_command(label="RSI")
-    trend_menu.add_command(label="Parabolic")
+    trend_menu.add_command(label="Bollinger Bands",command=lambda: get_bollinger_bands())
+    trend_menu.add_command(label="Moving Average",command=lambda: get_moving_average())
+    trend_menu.add_command(label="SAR",command=lambda: get_sar())
+    trend_menu.add_command(label="RSI",command=lambda: get_rsi())
+    trend_menu.add_command(label="Parabolic",command=lambda: get_parabolic())
 
-    indicator_menu.add_cascade(label="Trend", menu=trend_menu)
+    indicator_menu.add_cascade(label="Trends", menu=trend_menu)
 
-    file_menu2.add_cascade(label="Indicator", menu=indicator_menu)
+    file_menu2.add_cascade(label="Indicators", menu=indicator_menu)
     file_menu2.add_separator()
-    file_menu2.add_command(label="Titel Window")
+    file_menu2.add_command(label="Title ")
     file_menu2.add_separator()
-    file_menu2.add_command(label="Title Horizontal Window")
+    file_menu2.add_command(label="Title ")
     file_menu2.add_separator()
-    file_menu2.add_command(label="Title Vertical Window")
+    file_menu2.add_command(label="Title ")
     file_menu2.add_separator()
-    file_menu2.add_command(label="Cascade View")
+    file_menu2.add_command(label="Ca")
 
     file_menu3 = tkinter.Menu(menu_bar, tearoff=0)
-    file_menu3.add_command(label="CandleStick chart")
+    file_menu3.add_command(label="CandleStick chart", command=lambda : get_candle_stick_chart())
 
-    file_menu3.add_command(label="Bar chart")
+    file_menu3.add_command(label="Bar chart", command=lambda : get_bar_chart())
 
-    file_menu3.add_command(label="Line chart")
+    file_menu3.add_command(label="Line chart", command=lambda : get_line_chart())
 
     file_menu3.add_separator()
-    file_menu3.add_command(label="Foreground chart")
+    file_menu3.add_command(label="Foreground chart", command=lambda: get_foreground())
     file_menu3.add_separator()
 
-    file_menu3.add_command(label="TimeFrame")
+    file_menu3.add_command(label="TimeFrame", command=lambda: get_timeframe())
 
-    file_menu3.add_command(label="Template")
+    file_menu3.add_command(label="Template", command=lambda: get_template())
     file_menu3.add_separator()
 
     file_menu3.add_command(label="Grid")
     file_menu3.add_command(label="Volumes")
     file_menu3.add_command(label="Grid")
-    file_menu3.add_command(label="Auto Scroll")
+    file_menu3.add_command(label="Auto Scroll",command=lambda: get_auto_scroll())
     file_menu3.add_separator()
 
-    file_menu3.add_command(label="Properties")
-
+    file_menu3.add_command(label="Properties", command=lambda x: get_properties())
     menu_bar.add_cascade(label="Chart", menu=file_menu3)
-
     file_menu4 = tkinter.Menu(menu_bar, tearoff=0)
 
     file_menu4.add_command(label="New Window")
@@ -221,3 +321,5 @@ class MainWindow(object):
 
     MainWindow = tkinter.Tk()
     show(MainWindow)
+
+

@@ -14,7 +14,7 @@ class Db(object):
         self.password = password
 
     @classmethod
-    def connect(cls) -> bool:
+    def connect(cls) -> None:
         return connect()
 
 

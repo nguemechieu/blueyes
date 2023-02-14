@@ -7,8 +7,9 @@ build-backend = "hatchling.build"
 name = "Blueyes"
 version = "0.0.1"
 authors = [
-    { name="Nguemechieu noel", email="nnoelmartial@yahoo.fr" },
+    { name="Nguemechieu Noel Martial", email="nnoelmartial@yahoo.fr" },
 ]
+
 description = "Blueyes an investment and utility software develop to help and support investors and traders"
 readme = "README.md"
 requires-python = ">=3.11"
