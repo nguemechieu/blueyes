@@ -8,7 +8,7 @@ RUN echo "Now Installing Blueyes"
 RUN apt-get   update
 
 RUN apt-get install -y mysql
-RUN echo systemctl service mysql start
+
 COPY pyproject.toml pyproject.toml
 RUN echo "--------------------------------"
 FROM python:latest 
