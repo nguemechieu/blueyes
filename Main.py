@@ -1,31 +1,26 @@
 import logging
+
 from Bueyes.src.UI.MainWindow import MainWindow
+from Bueyes.src.UI.News import News
+
 # Create and configure logger
-logging.basicConfig(filename="newfile.log",
-                    format='%(asctime)s %(message)s',
-                    filemode='w')
-
+logging.basicConfig(filename="newfile.log", format='%(asctime)s %(message)s', filemode='w')
 # Creating an object
-logger = logging.getLogger()
-
+logger = logging.getLogger(__name__)
 # Setting the threshold of logger to DEBUG
 logger.setLevel(logging.DEBUG)
-# Creating an object
-# opts, args = getopt.getopt(sys.argv,"?hH")
 
 
-def main() -> None:
-    app = MainWindow
-
-    app.MainWindow.show()
-
-    # Test messages
-
-    return
+# Defining main function
+def main():
+    main0 = MainWindow()
+    main0.show()
 
 
-# Starting Application
+# Using the special variable
+# __name__
+if __name__ == "__main__":
+
+    main()
 
 
-main()
-logger.debug("Harmless debug Message")

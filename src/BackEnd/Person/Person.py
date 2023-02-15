@@ -1,4 +1,4 @@
-import logging
+
 import datetime
 import uuid as uuid
 
@@ -18,6 +18,7 @@ class Person(object):
         self.address = address
         self.dateCreated = datetime.datetime.fromtimestamp()
 
-        logger = logging.getLogger(__name__)
+
+
 
 

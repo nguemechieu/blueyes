@@ -1,7 +1,25 @@
+import RequestHandler
 
-class BinanceUs(object):
 
-        def __init__(self,currency=None):
-                self.currency =currency
+class BinanceUs:
+    def __init__(self, api_key):
+        self.api_key = api_key
 
-        def __str__(self): return self.currency        
+
+def create() -> bool:
+    req = RequestHandler
+
+    rw = req.make_request("https://api.binance.us", "POST", "2345456fgh", url)
+    if rw is None: return False
+
+
+def trade(): return
+
+
+def order(): return
+
+
+def run(): return
+
+
+def update(): return
