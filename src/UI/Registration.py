@@ -1,39 +1,24 @@
-
+import tkinter
 from tkinter import *
 from tkinter import messagebox
 
 from Bueyes.Db import Db
 
 
-class Registration(object):
+class Registration:
 
     def __init__(self, root):
         self.root = root
+        right_frame = Frame(root, padx=200, pady=45)
+        right_frame.pack(side='left', fill=X)
 
-        ws = Frame(root, padx=200, height=50, pady=200)
-
+        right_frame.title = "Blueyes |Registration"
 
         f = ('Times', 14)
 
         conn = Db
 
         # widgets
-        left_frame = Frame(
-            ws,
-            bd=2,
-            bg='#CCCCCC',
-            relief=SOLID,
-            padx=10,
-            pady=10
-        )
-
-        right_frame = Frame(
-            ws,
-            bd=2,
-            bg='#CCCCCC',
-            relief=SOLID,
-            padx=10,
-            pady=10)
 
         Label(right_frame,
               text="Enter Name",
@@ -134,6 +119,7 @@ class Registration(object):
             font=('Times', 10),
 
         )
+        female_rb.pack()
 
         others_rb = Radiobutton(
             gender_frame,
@@ -144,6 +130,7 @@ class Registration(object):
             font=('Times', 10)
 
         )
+        others_rb.pack()
 
         register_country = OptionMenu(
             right_frame,
@@ -154,18 +141,18 @@ class Registration(object):
             width=15,
             font=('Times', 12)
         )
+
         register_pwd = Entry(
             right_frame,
             font=f,
             show='*'
         )
+
         pwd_again = Entry(
             right_frame,
             font=f,
             show='*'
         )
-
-        left_frame.place(x=50, y=50)
 
         def insert_record():
 
@@ -254,15 +241,8 @@ class Registration(object):
         register_pwd.grid(row=5, column=1, pady=10, padx=20)
         pwd_again.grid(row=6, column=1, pady=10, padx=20)
         register_btn.grid(row=7, column=1, pady=10, padx=20)
-        right_frame.place(x=500, y=50)
 
         gender_frame.grid(row=3, column=1, pady=10, padx=20)
         male_rb.pack(expand=True, side=LEFT)
         female_rb.pack(expand=True, side=LEFT)
         others_rb.pack(expand=True, side=LEFT)
-        ws.pack(side='left', pady=10, ipadx=21)
-
-
-
-
-

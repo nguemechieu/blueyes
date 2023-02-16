@@ -1,4 +1,4 @@
-import self
+
 from mysql.connector import MySQLConnection, Error
 
 from Bueyes.src.BackEnd.configparser.ConfigParser import read_db_config
@@ -35,3 +35,8 @@ class Db(object):
     def execute(self, param):
 
         self.connexion().cmd_stmt_execute(statement_id=self.conn1, data=param, flags=0)
+
+    @classmethod
+    def commit(cls):
+        cls.connexion().commit()
+        pass

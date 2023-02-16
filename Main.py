@@ -1,34 +1,16 @@
 import logging
 import tkinter
 
-from Bueyes.src.UI.LoginFrame import LoginFrame
+from Bueyes.src.UI.LoginFrame import LoginFrame, show_pages
 
 # Create and configure logger
-logging.basicConfig(filename="newfile.log", format='%(asctime)s %(message)s', filemode='w')
+logging.basicConfig(filename="blueyes.log", format='%(asctime)s %(message)s', filemode='w')
+
 # Creating an object
-logger = logging.getLogger(__name__)
-# Setting the threshold of logger to DEBUG
-logger.setLevel(logging.DEBUG)
-
-
-# Defining main function
-def main():
-    if __name__ == '__main__':
-        root = tkinter.Tk()
-        root.iconify = True
-        root.resizable = True
-        root.image_names = ['blueyes.png']
-        root.iconbitmap('../Bueyes/src/images/blueyes.ico')
-        bgf = tkinter.PhotoImage(file='../Bueyes/src/images/blueyes.png')
-
-        # Adjust size
-        root.geometry("1530x780")
-        return LoginFrame(root=root, bgf=bgf)
-
-
+logging.getLogger(__name__)
 
 # Using the special variable
 # __name__
 if __name__ == "__main__":
-    main().mainloop()
 
+    show_pages('Login')
