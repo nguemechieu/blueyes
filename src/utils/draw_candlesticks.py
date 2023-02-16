@@ -2,13 +2,10 @@
 # -*- coding: utf-8; py-indent-offset:4 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import matplotlib.pyplot as plt
-from matplotlib import colors as mcolors
+import pandas as pd
+from matplotlib.dates import date2num
 from matplotlib.lines import Line2D
 from matplotlib.patches import Rectangle
-from matplotlib.dates import date2num
-
-import pandas as pd
 
 
 def draw_candlesticks(ax, df):

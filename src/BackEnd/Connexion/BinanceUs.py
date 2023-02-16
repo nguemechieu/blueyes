@@ -9,7 +9,7 @@ class BinanceUs:
 def create() -> bool:
     req = RequestHandler
 
-    rw = req.make_request("https://api.binance.us", "POST", "2345456fgh", url)
+    rw = req.make_request("https://api.binance.us", "POST", "2345456fgh")
     if rw is None: return False
 
 

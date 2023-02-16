@@ -4,18 +4,20 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
-import talib
+import tablib as tablib
 
-class renko:
+
+class Renko:
     def __init__(self):
+        self.brick_size = None
         self.source_prices = []
         self.renko_prices = []
         self.renko_directions = []
 
     # Setting brick size. Auto mode is preferred, it uses history
-    def set_brick_size(self, HLC_history = None, auto = True, brick_size = 10.0):
-        if auto == True:
-            self.brick_size = self.__get_optimal_brick_size(HLC_history.iloc[:, [0, 1, 2]])
+    def set_brick_size(self, hlc_history=None, auto=True, brick_size=10.0):
+        if auto:
+            self.brick_size = self.__get_optimal_brick_size(hlc_history.iloc[:, [0, 1, 2]])
         else:
             self.brick_size = brick_size
         return self.brick_size
@@ -31,20 +33,20 @@ class renko:
         if gap_div != 0:
             # Forward any direction (up or down)
             if (gap_div > 0 and (self.renko_directions[-1] > 0 or self.renko_directions[-1] == 0)) \
-            or (gap_div < 0 and (self.renko_directions[-1] < 0 or self.renko_directions[-1] == 0)):
+                    or (gap_div < 0 and (self.renko_directions[-1] < 0 or self.renko_directions[-1] == 0)):
                 num_new_bars = gap_div
                 is_new_brick = True
                 start_brick = 0
             # Backward direction (up -> down or down -> up)
-            elif np.abs(gap_div) >= 2: # Should be double gap at least
+            elif np.abs(gap_div) >= 2:  # Should be double gap at least
                 num_new_bars = gap_div
                 num_new_bars -= np.sign(gap_div)
                 start_brick = 2
                 is_new_brick = True
                 self.renko_prices.append(self.renko_prices[-1] + 2 * self.brick_size * np.sign(gap_div))
                 self.renko_directions.append(np.sign(gap_div))
-            #else:
-                #num_new_bars = 0
+            # else:
+            # num_new_bars = 0
 
             if is_new_brick:
                 # Add each brick
@@ -80,19 +82,20 @@ class renko:
             return self.__renko_rule(last_price)
 
     # Simple method to get optimal brick size based on ATR
-    def __get_optimal_brick_size(self, HLC_history, atr_timeperiod = 14):
+    @staticmethod
+    def __get_optimal_brick_size(hlc_history, atr_timeperiod=14):
         brick_size = 0.0
 
         # If we have enough of data
-        if HLC_history.shape[0] > atr_timeperiod:
-            brick_size = np.median(talib.ATR(high = np.double(HLC_history.iloc[:, 0]),
-                                             low = np.double(HLC_history.iloc[:, 1]),
-                                             close = np.double(HLC_history.iloc[:, 2]),
-                                             timeperiod = atr_timeperiod)[atr_timeperiod:])
+        if hlc_history.shape[0] > atr_timeperiod:
+            brick_size = np.median(tablib.ATR(high=np.double(hlc_history.iloc[:, 0]),
+                                              low=np.double(hlc_history.iloc[:, 1]),
+                                              close=np.double(hlc_history.iloc[:, 2]),
+                                              timeperiod=atr_timeperiod)[atr_timeperiod:])
 
         return brick_size
 
-    def evaluate(self, method = 'simple'):
+    def evaluate(self, method='simple'):
         balance = 0
         sign_changes = 0
         price_ratio = len(self.source_prices) / len(self.renko_prices)
@@ -123,7 +126,7 @@ class renko:
     def get_renko_directions(self):
         return self.renko_directions
 
-    def plot_renko(self, col_up = 'g', col_down = 'r'):
+    def plot_renko(self, col_up='g', col_down='r'):
         fig, ax = plt.subplots(1, figsize=(20, 10))
         ax.set_title('Renko chart')
         ax.set_xlabel('Renko bars')
@@ -146,10 +149,10 @@ class renko:
             # Draw bar with params
             ax.add_patch(
                 patches.Rectangle(
-                    (x, y),   # (x,y)
-                    1.0,     # width
-                    self.brick_size, # height
-                    facecolor = col
+                    (x, y),  # (x,y)
+                    1.0,  # width
+                    self.brick_size,  # height
+                    facecolor=col
                 )
             )
 

@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8; py-indent-offset:4 -*-
-import TAcharts
+
 
 import os
+
+import TAcharts
 import pandas as pd
 
 DOWNLOAD_URL = "https://raw.githubusercontent.com/carlfarterson/TAcharts/master/ohlcv"

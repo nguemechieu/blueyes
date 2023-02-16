@@ -19,7 +19,7 @@ dap = np.array([-da[1], da[0]])
 
 denom = dap.dot(db)
 num = dap.dot(dp)
-(float(num) / denom)*db + b1
+(float(num) / denom) * db + b1
 # ------------------------------------------------------------------------------
 # Step 2. Use the same 4 points, similar to two points on moving averages that cross
 
@@ -32,10 +32,14 @@ plt.plot(line4)
 plt.show()
 
 # VERSION 1
-test = list(map(lambda x: [[line3[x-1], line3[x]], [line4[x-1], line4[x]]], cross_indices))
+test = list(map(lambda x: [[line3[x - 1], line3[x]], [line4[x - 1], line4[x]]], cross_indices))
+
+
 # VERSION 2
 def foo(x):
-    return [[line3[x-1], line3[x]], [line4[x-1], line4[x]]]
+    return [[line3[x - 1], line3[x]], [line4[x - 1], line4[x]]]
+
+
 test = list(map(foo, cross_indices))
 
 matrices = test[0]
@@ -50,14 +54,13 @@ dap = [-da[1], 1]
 
 denom = np.dot(dap, db)
 # OR
-denom = dap[0]*db[0] + dap[1]*db[1]
-
+denom = dap[0] * db[0] + dap[1] * db[1]
 
 num = np.dot(dap, dp)
 # OR
-num = dap[0]*dp[0] + dap[1]*dp[1]
+num = dap[0] * dp[0] + dap[1] * dp[1]
 
-(float(num) / denom)*np.array(db) + [0, matrices[1][0]]
+(float(num) / denom) * np.array(db) + [0, matrices[1][0]]
 
 # ------------------------------------------------------------------------------
 # Step 3. Simplify steps above
@@ -67,7 +70,7 @@ line4 = np.array([6, 2])
 
 cross_indices = crossover(line3, line4)
 
-test = list(map(lambda x: [[line3[x-1], line3[x]], [line4[x-1], line4[x]]], cross_indices))
+test = list(map(lambda x: [[line3[x - 1], line3[x]], [line4[x - 1], line4[x]]], cross_indices))
 
 matrices = test[0]
 
@@ -112,13 +115,13 @@ multiplier = float(num) / denom
 [multiplier, multiplier * (line4[1] - line4[0]) + line4[0]]
 
 # Right side
-multiplier*(line4[1] - line4[0]) + line4[0]
+multiplier * (line4[1] - line4[0]) + line4[0]
 
 x = multiplier
 a = line4[0]
 b = line4[1]
 
-a + x*(b - a)
+a + x * (b - a)
 
 # -------------------------------------------------------------------------
 # Step 6. Figure out less repeated calculations
@@ -136,7 +139,7 @@ denom = line4_diff - line3_diff
 pos1_diff = float(line3[0] - line4[0])
 
 # NOTE: `x` is the same as slope
-x = (pos1_diff)/(line4_diff - line3_diff)
+x = (pos1_diff) / (line4_diff - line3_diff)
 
 y = line4_diff * x + line4[0]
 
@@ -149,7 +152,7 @@ avg2 = pd.Series([7, 2, 2, 5, 5, 4])
 
 cross_indices = crossover(avg1, avg2)
 
-tuple_lst = ((avg1[i-1], avg1[i], avg2[i-1], avg2[i]) for i in cross_indices)
+tuple_lst = ((avg1[i - 1], avg1[i], avg2[i - 1], avg2[i]) for i in cross_indices)
 
 # Dict of intersections with relative x and y position
 results = {index: intersection(*x) for index, x in zip(cross_indices, tuple_lst)}
@@ -161,16 +164,15 @@ area_between(line1, line2)
 [area_between(avg1[start:end], avg2[start:end]) for start, end in zip(cross_indices[:-1], cross_indices[1:])]
 
 
-
 def intersection(a0, a1, b0, b1):
-    ''' Return the x and y coordinates '''
+    """ Return the x and y coordinates """
     a_diff = a1 - a0
     b_diff = b1 - b0
 
     pos0_diff = float(a0 - b0)
 
     x = pos0_diff / (b_diff - a_diff)
-    y = b_diff*x + b0
+    y = b_diff * x + b0
 
     return x, y
 

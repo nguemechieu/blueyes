@@ -23,6 +23,11 @@ def average_true_range(high, low, close, n=14, fillna= False):
         n(int): n period.
     Returns:
         pandas.Series: New feature generated.
+        :param n:
+        :param close:
+        :param low:
+        :param high:
+        :param fillna:
     """
     cs = close.shift(1)
     tr = high.combine(cs, max) - low.combine(cs, min)

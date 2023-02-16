@@ -2,9 +2,9 @@
 # -*- coding: utf-8; py-indent-offset:4 -*-
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-from TAcharts.wrappers import pd_series_to_np_array
-
 import numpy as np
+
+from Bueyes.src.wrappers import pd_series_to_np_array
 
 
 @pd_series_to_np_array
@@ -13,7 +13,7 @@ def apply_across(*args, fn=None):
 
     if len(args) <= 0:
         raise StandardError("Enter more than one argument.")
-    elif fn == None:
+    elif fn is None:
         raise ValueError("Enter a function name.")
 
     applied_across = getattr(np, fn)(args, axis=0)
