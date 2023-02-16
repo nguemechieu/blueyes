@@ -5,7 +5,6 @@ from doctest import master
 from tkinter import Label, messagebox, X
 from turtledemo.chaos import f
 
-
 from Bueyes.Db import Db
 from Bueyes.src.UI import Registration, ResetPassword
 from Bueyes.src.UI.ForgotPassword import ForgotPassword
@@ -13,14 +12,14 @@ from Bueyes.src.UI.MainWindow import show
 
 
 def validate_login(user_: str = '', pwd_: str = '') -> object:
+    global warn_
     check_counter = None
     db_username_ = None
     db_password_ = None
-    db = Db.connect()
 
     try:
 
-        c = db.connect().cursor()
+        c = Db()
 
         for row in c.execute("Select * from users"):
             db_username_ = row[1]
@@ -48,7 +47,6 @@ def validate_login(user_: str = '', pwd_: str = '') -> object:
 
     else:
         messagebox.showerror('', warn_)
-        return db
 
 
 def reset_pass(): pass
@@ -94,7 +92,6 @@ def show_pages(page0):
 class LoginFrame(tkinter.Tk):
 
     def __init__(self, root, bgf=None):
-
         super().__init__()
         self.root = root
         self.bgf = bgf

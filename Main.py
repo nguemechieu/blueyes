@@ -1,6 +1,5 @@
 import logging
 import tkinter
-from doctest import master
 
 from Bueyes.src.UI.LoginFrame import LoginFrame
 

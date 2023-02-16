@@ -6,21 +6,20 @@ from Bueyes.src.BackEnd.configparser.ConfigParser import read_db_config
 
 class Db(object):
 
-    @staticmethod
-    def connect() -> object:
+    def __init__(self):
+        self.conn1 = None
+
+    def connexion(self, conn1=None):
+        self.conn1 = conn1
         """ Connect to MySQL database """
 
-        global conn1
-        db_config = read_db_config()
-
         try:
-            print('Connecting to '+db_config.get('database')+' database...')
+            print('Connecting to ' + read_db_config().get('database') + ' database...')
 
-            conn1 = MySQLConnection(**db_config)
+            conn1: MySQLConnection = MySQLConnection(**read_db_config())
 
             if conn1.is_connected():
                 print('Connection established.')
-
                 return conn1
             else:
                 print('Connection failed.')
@@ -33,6 +32,6 @@ class Db(object):
                 conn1.close()
                 print('Connection closed.')
 
-    @classmethod
-    def commit(cls):
-        conn1.commit()
+    def execute(self, param):
+
+        self.connexion().cmd_stmt_execute(statement_id=self.conn1, data=param, flags=0)
