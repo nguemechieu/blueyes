@@ -7,8 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'Blueyes'
-copyright = '2023, nguemechieu noel m'
-author = 'nguemechieu noel m'
+copyright = '2023, nguemechieu noel martial'
+author = 'nguemechieu noel martial'
 release = '1.0.0'
 
 # -- General configuration ---------------------------------------------------

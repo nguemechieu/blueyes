@@ -1,5 +1,4 @@
 import tkinter
-from distutils.command.config import config
 from tkinter import X
 
 

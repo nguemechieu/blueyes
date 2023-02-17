@@ -1,9 +1,7 @@
 import tkinter
 from tkinter import TOP
 
-from self import self
-
-from Bueyes.src.BackEnd.Connexion.RequestHandler import make_request
+from src.BackEnd.Connexion.RequestHandler import make_request
 
 
 class News(object):
@@ -20,7 +18,7 @@ class News(object):
         urls = "http://nfs.faireconomy.media/ff_calendar_thisweek.json?version=74f11aed5c03a2a90fca2a09a68e03b9"
         method = "GET"
         ap_i = "123456gjo"
-        r = make_request(self, method, ap_i, urls, data0)
+        r = make_request( method, ap_i, urls, data0)
         return r.json()
 
     @classmethod

@@ -2,7 +2,7 @@ import tkinter
 from tkinter import *
 from tkinter import messagebox
 
-from Bueyes.Db import Db
+from Db import Db
 
 
 class Registration:

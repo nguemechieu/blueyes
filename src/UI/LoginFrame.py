@@ -4,10 +4,10 @@ import tkinter
 from tkinter import Label, messagebox, X, Tk
 from turtledemo.chaos import f
 
-from Bueyes.Db import Db
-from Bueyes.src.UI import Registration, ResetPassword
-from Bueyes.src.UI.ForgotPassword import ForgotPassword
-from Bueyes.src.UI.MainWindow import MainWindow
+from src.Db import Db
+from src.UI import ResetPassword, Registration
+from src.UI.ForgotPassword import ForgotPassword
+from src.UI.MainWindow import MainWindow
 
 
 class UpdatePassword:
@@ -25,7 +25,7 @@ def show_pages(page0):
     root.iconify = True
     root.resizable = True
     root.image_names = ['blueyes.png']
-    root0.iconbitmap('../Bueyes/src/images/blueyes.ico')
+    root0.iconbitmap('images/blueyes.ico')
     # Adjust size
     root0.geometry("1530x780")
 
@@ -58,8 +58,8 @@ def show_pages(page0):
         root.iconify = True
         root.resizable = True
         root0.image_names = ['blueyes.png']
-        root0.iconbitmap('../Bueyes/src/images/blueyes.ico')
-        bgf = tkinter.PhotoImage(file='../Bueyes/src/images/blueyes.png')
+        root0.iconbitmap('images/blueyes.ico')
+        bgf = tkinter.PhotoImage(file='images/blueyes.png')
         r = LoginFrame(root=root)
 
         r.remember__me = False
@@ -75,8 +75,10 @@ def show_pages(page0):
     root.mainloop()
 
 
-def validate_login(user_: str = '', pwd_: str = ''):
-    global warn_, db_username_, db_password_
+def validate_login(user_: str ='', pwd_: str=''):
+    warn_ : str="Please enter your username and password"
+    db_username_: str=""
+    db_password_: str=""
     check_counter = None
 
     try:
@@ -87,7 +89,7 @@ def validate_login(user_: str = '', pwd_: str = ''):
             db_username_ = row[1]
             db_password_ = row[5]
     except Exception as ep:
-        messagebox.showerror('Error', ep)
+             messagebox.showerror('Error', ep)
 
     if user_ == "":
         warn_ = "Username can't be empty"
@@ -146,7 +148,7 @@ class LoginFrame:
         tkinter.Button(master_, text='Register',
                        font=f,
                        cursor='hand2', command=lambda: show_pages(page0='Register')).grid(row=6, column=0)
-        # login button
+
 
         tkinter.Button(master_, text="Forgot Password", background='purple', font=f,
 

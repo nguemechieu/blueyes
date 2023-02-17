@@ -1,9 +1,6 @@
 import tkinter
 
-import mysql.connector
-
-from Bueyes.Db import Db
-from Bueyes.src.BackEnd.configparser.ConfigParser import read_db_config
+from Db import Db
 
 
 def get_login_frame():

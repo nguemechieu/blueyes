@@ -1,4 +1,4 @@
-from Bueyes.src.BackEnd.Connexion.Currency import Currency
+from src.BackEnd.Connexion.Currency import Currency
 
 
 class CryptoCurrency(Currency):

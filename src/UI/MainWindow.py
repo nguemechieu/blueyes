@@ -7,7 +7,7 @@ from tkinter import filedialog, BOTTOM, LEFT, X, TOP
 from tkinter.filedialog import Open, SaveAs
 from typing import Type
 
-from Bueyes.src.UI.CandleStickChart import CandleStickChart
+from src.UI.CandleStickChart import CandleStickChart
 
 
 def get_new_window():

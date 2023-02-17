@@ -1,6 +1,7 @@
 import logging
 
-from Bueyes.src.UI.LoginFrame import show_pages
+from src.UI.LoginFrame import show_pages
+
 # Create and configure logger
 logging.basicConfig(filename="blueyes.log", format='%(asctime)s %(message)s', filemode='w')
 

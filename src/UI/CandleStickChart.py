@@ -63,5 +63,6 @@ class CandleStickChart(object):
 
         # rotate x-axis tick labels
         plt.xticks(rotation=45, ha='right')
+        plt.show()
 
         # display candlestick chart
