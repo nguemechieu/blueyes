@@ -79,7 +79,7 @@ def validate_login(user_: str ='', pwd_: str=''):
     warn_ : str="Please enter your username and password"
     db_username_: str=""
     db_password_: str=""
-    check_counter = None
+    check_counter = ''
 
     try:
 
@@ -140,7 +140,10 @@ class LoginFrame:
                        text='Login',
                        font=f,
 
-                       cursor='hand2', command=lambda: validate_login(user_=usern_.get(), pwd_=passw_.get())).grid(
+                       cursor='hand2',
+                       command=lambda: validate_login(user_=usern_.get(),
+
+                       pwd_=passw_.get())).grid(
             row=6,
             column=2)
 

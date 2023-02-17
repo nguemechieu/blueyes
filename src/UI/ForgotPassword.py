@@ -1,6 +1,6 @@
 import tkinter
 
-from Db import Db
+from src.Db import Db
 
 
 def get_login_frame():

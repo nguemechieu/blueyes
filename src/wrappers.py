@@ -4,7 +4,6 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import pandas as pd
 
-
 def args_to_dtype(dtype):
     """ Convert arguments in a function to a specific data type, depending on what
         actions will be done with the arguments """

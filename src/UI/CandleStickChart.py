@@ -16,30 +16,25 @@ class CandleStickChart(object):
         width2 = .05
 
         # define up and down prices
-
         # create DataFrame
-
-        prices0 = pd.read_csv("btc-prices.csv")
-        date = prices0['Date']
-        open_: double
-        open_ = prices0['Open']
-        high: double
-        high = prices0['High']
-        low: double
-        low = prices0['Low']
-        close_: double
-        close_ = prices0['Close']
-        volume = prices0['Volume']
-        openvar = [35, 22, 21, 19, 23, 21, 25, 29]
-        highvar = [79, 20, 17, 23, 22, 25, 29, 31]
-        lowvar = [8, 27, 29, 25, 24, 26, 31, 37]
-        closevar = [89, 16, 14, 17, 19, 18, 22, 26]
+        prices = pd.read_csv("btc-prices.csv")
+        date = prices['Date']
+        open_: double = prices['Open']
+        high: double= prices['High']
+        low: double = prices['Low']
+        close_: double= prices['Close']
+        volume = prices['Volume']
+        openvar = [20, 22, 21, 19, 23, 21, 25, 29]
+        highvar = [31, 20, 17, 23, 22, 25, 29, 31]
+        lowvar = [13, 27, 29, 25, 24, 26, 31, 37]
+        closevar = [30, 16, 14, 17, 19, 18, 22, 26]
 
         prices = pd.DataFrame({'Open': openvar,
                                'Close': closevar,
                                'High': highvar,
                                'Low': lowvar},
                               index=pd.date_range("2015-01-01", periods=8, freq="d"))
+
 
         # define up and down prices
         up = prices[prices.Close >= prices.Open]
@@ -62,7 +57,13 @@ class CandleStickChart(object):
         plt.bar(down.index, down.Low - down.Close, width2, bottom=down.Close, color=col2)
 
         # rotate x-axis tick labels
-        plt.xticks(rotation=45, ha='right')
+        plt.xticks(rotation=35, ha='right')
+        plt.scatter(up.index, up.Close - up.Open)
+
+        plt.title('Market Data')
+        plt.xlabel('Time')
+        plt.ylabel('Price')
+
         plt.show()
 
         # display candlestick chart
