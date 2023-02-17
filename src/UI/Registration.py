@@ -9,7 +9,7 @@ class Registration:
 
     def __init__(self, root):
         self.root = root
-        right_frame = Frame(root, padx=200, pady=45)
+        right_frame = Frame(root, padx=300, pady=35)
         right_frame.pack(side='left', fill=X)
 
         right_frame.title = "Blueyes |Registration"

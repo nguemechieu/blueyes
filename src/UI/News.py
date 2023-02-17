@@ -3,7 +3,7 @@ from tkinter import TOP
 
 from self import self
 
-from Bueyes.src.BackEnd.Connexion.RequestHandler import RequestHandler, make_request
+from Bueyes.src.BackEnd.Connexion.RequestHandler import make_request
 
 
 class News(object):

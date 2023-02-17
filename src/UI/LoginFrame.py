@@ -1,58 +1,82 @@
+import datetime
 import tkinter
-from datetime import datetime
 
-from tkinter import Label, messagebox, X
+from tkinter import Label, messagebox, X, Tk
 from turtledemo.chaos import f
 
 from Bueyes.Db import Db
 from Bueyes.src.UI import Registration, ResetPassword
 from Bueyes.src.UI.ForgotPassword import ForgotPassword
-from Bueyes.src.UI.MainWindow import show
+from Bueyes.src.UI.MainWindow import MainWindow
+
+
+class UpdatePassword:
+    pass
 
 
 def show_pages(page0):
     pages = ['Register', 'Forgot Password', 'Update Password', 'Reset Password', 'Login', 'Main', 'About']
 
-    root = tkinter.Tk()
+    root0: Tk = tkinter.Tk()
+    root = tkinter.Frame(root0, border=9)
+    root.pack()
     # Add image file
-    root.title('Blueyes| Login            ' + datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+    root0.title('Blueyes| Login            ' + datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
     root.iconify = True
     root.resizable = True
     root.image_names = ['blueyes.png']
-    root.iconbitmap('../Bueyes/src/images/blueyes.ico')
+    root0.iconbitmap('../Bueyes/src/images/blueyes.ico')
     # Adjust size
-    root.geometry("1530x780")
+    root0.geometry("1530x780")
 
     if page0 == pages[0]:
-        root.title('Blueyes| Registration           ' + datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+        root.forget()
 
-        Registration.Registration(root)
+        root0.title('Blueyes| Registration           ' + datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+
+        Registration.Registration(root0)
 
     if page0 == pages[1]:
-        ForgotPassword.show()
+        root.destroy()
+
+        root0.geometry('1530x780')
+        root0.title('Blueyes | ForgotPassword  - blueyes.org')
+
+        ForgotPassword(root=root0)
 
     if page0 == pages[2]:
+        root.destroy()
         ResetPassword.show()
 
     if page0 == pages[3]:
+        root.forget()
         UpdatePassword.show()
-
     if page0 == pages[4]:
+        root.destroy()
+        root = tkinter.Frame(root0)
+        root.pack()
         root.iconify = True
         root.resizable = True
-        root.image_names = ['blueyes.png']
-        root.iconbitmap('../Bueyes/src/images/blueyes.ico')
+        root0.image_names = ['blueyes.png']
+        root0.iconbitmap('../Bueyes/src/images/blueyes.ico')
         bgf = tkinter.PhotoImage(file='../Bueyes/src/images/blueyes.png')
         r = LoginFrame(root=root)
+
         r.remember__me = False
 
     if page0 == pages[5]:
-        show()
+        root.destroy()
+        root0.title("Blueyes| Dashboard                           " + datetime.datetime.now().strftime("%Y-%m-%d "
+                                                                                                      "%H:%M:%S"))
+        root0.geometry("1530x780")
+
+        MainWindow(root0)
+
     root.mainloop()
 
 
 def validate_login(user_: str = '', pwd_: str = ''):
-    global warn_
+    global warn_, db_username_, db_password_
     check_counter = None
 
     try:
@@ -74,7 +98,7 @@ def validate_login(user_: str = '', pwd_: str = ''):
         warn_ = "Password can't be empty"
     else:
         check_counter += 1
-
+    show_pages('Main')
     if check_counter == 2:
         if user_ == db_username_ and pwd_ == db_password_:
             messagebox.showinfo('Login Status', 'Logged in Successfully!')
@@ -85,12 +109,6 @@ def validate_login(user_: str = '', pwd_: str = ''):
 
     else:
         messagebox.showerror('', warn_)
-
-
-class UpdatePassword:
-    @classmethod
-    def show(cls):
-        pass
 
 
 class LoginFrame:
