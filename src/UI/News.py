@@ -1,7 +1,8 @@
+import json
 import tkinter
 from tkinter import TOP
 
-from src.BackEnd.Connexion.RequestHandler import make_request
+from src.BackEnd.Connexion.RequestHandler import RequestHandler
 
 
 class News(object):
@@ -14,27 +15,26 @@ class News(object):
         self.previous = previous
 
     @staticmethod
-    def get(data0='') -> object:
+    def get() -> object:
         urls = "http://nfs.faireconomy.media/ff_calendar_thisweek.json?version=74f11aed5c03a2a90fca2a09a68e03b9"
-        method = "GET"
-        ap_i = "123456gjo"
-        r = make_request( method, ap_i, urls, data0)
-        return r.json()
+
+        r =RequestHandler(url0=urls). make_request()
+        return json.loads(r)
 
     @classmethod
     def show(cls) -> None:
-        cls = tkinter.Tk()
-        menubar = tkinter.Menu(cls, background='brown')
+        cl = tkinter.Tk()
+        menubar = tkinter.Menu(cl, background='brown')
 
-        cls.config(menu=menubar, background='green')
+        cl.config(menu=menubar, background='green')
 
-        panel = tkinter.PanedWindow(cls)
-        list_view = tkinter.Listbox(cls)
+        panel = tkinter.PanedWindow(cl)
+        list_view = tkinter.Listbox(cl)
 
         list_view.pack(side=TOP)
         panel.pack()
         panel.add(label='news')
 
-        cls.mainloop()
+        cl.mainloop()
 
         return

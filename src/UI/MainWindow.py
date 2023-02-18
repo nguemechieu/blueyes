@@ -1,4 +1,3 @@
-import datetime
 import glob
 import os
 import random
@@ -6,17 +5,13 @@ import tkinter
 from tkinter import filedialog, BOTTOM, LEFT, X, TOP
 from tkinter.filedialog import Open, SaveAs
 from typing import Type
-
 from src.UI.CandleStickChart import CandleStickChart
-
 
 def get_new_window():
     pass
-
-
 class MainWindow(object):
 
-    def __init__(self, root=None):
+    def __init__(self, root:tkinter.Tk=None):
 
         self.root = root
         # Settings main window
@@ -175,7 +170,7 @@ class MainWindow(object):
 
         # Create sub window
 
-        toolbar = tkinter.Frame(win_dow, relief="raised", takefocus=2, border=2, background='blue'
+        toolbar = tkinter.Frame(root, relief="raised", takefocus=2, border=2, background='blue'
 
                                 )
         toolbar.pack(side=TOP, ipadx=2)
@@ -197,8 +192,9 @@ class MainWindow(object):
             # tkinter.Label(sub_window, text="Position 3 : x=75, y=80", bg="#FF0099", fg="white").place(x=75, y=80)
 
             # Create toolbar for managing candle stick events and trades
-            toolbar2 = tkinter.Frame(win_dow, borderwidth=2, height=2, padx=2, pady=2, highlightcolor='black')
+            toolbar2 = tkinter.Frame(root, borderwidth=2, height=2, padx=2, pady=2, highlightcolor='black')
             toolbar2.pack(side=BOTTOM, ipadx=2, padx=2, pady=2, expand=3, ipady=2)
+
         btn_list = ['BUY', 'SELL', 'Trailing Buy', 'Trailing Sell', 'Close All']
 
         for i in btn_list:
@@ -216,16 +212,19 @@ class MainWindow(object):
                                               justify='center')
                 buy_sell_btn.pack(side=LEFT, ipadx=2, ipady=2, padx=2)
 
-        # Main loop for displaying
 
-        sub_window = tkinter.Frame(root)
 
-        CandleStickChart(sub_window)
 
-        # tkinter.Canvas(sub_window, background='black', borderwidth=10, width=1100, height=300, border=12,
-        #   relief='raised')
 
-        sub_window.pack(side=LEFT, ipadx=7, fill=X)
+        CandleStickChart(root)
+
+
+
+
+
+
+
+
 
 
 def print_view():

@@ -1,19 +1,29 @@
 import json
+import logging
 from urllib import request, response
+
+import requests
 
 
 class RequestHandler(object):
-    def __init__(self, requests, api_key, url0):
-        self.request = requests
-        self.url = url0
+    def __init__(self,  api_key, url0):
+
+        self.url0 = url0
         self.api_key = api_key
 
 
-def make_request(method0: object, api_key: str, urls: str, data0: str = None) -> json:
-    r = request.urlopen(url =urls, data=data0, cadefault=False, capath='', timeout=5000)
-    r.add_header("Authorization", "Bearer " + api_key)
-    r.add_header("Content-Type", "application/json")
-    r.add_header("Accept", "application/json")
 
-    print("response ", response)
-    return json.loads(r.read())
+    def make_request(self,path) -> json:
+     r = requests
+     data=r.get(url=self.url0+path,params=None,headers={  'Content-Type' : 'application/json','Authorization' : 'Bearer ' + self.api_key}
+           ,timeout=5000,allow_redirects=True,stream=True,verify=True)
+
+
+     if data.status_code!=200:
+         logging.error("Error creating request"+ data.text)
+
+         print("Error creating request status code ="+ data.status_code .__str__()+ data.text)
+     else: print('Request created successfully '+ data.text)
+
+
+     return json.loads(data.text)

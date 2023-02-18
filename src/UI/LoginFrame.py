@@ -3,20 +3,14 @@ import tkinter
 
 from tkinter import Label, messagebox, X, Tk
 from turtledemo.chaos import f
-
 from src.Db import Db
 from src.UI import ResetPassword, Registration
 from src.UI.ForgotPassword import ForgotPassword
 from src.UI.MainWindow import MainWindow
-
-
 class UpdatePassword:
     pass
-
-
 def show_pages(page0):
     pages = ['Register', 'Forgot Password', 'Update Password', 'Reset Password', 'Login', 'Main', 'About']
-
     root0: Tk = tkinter.Tk()
     root = tkinter.Frame(root0, border=9)
     root.pack()
@@ -25,7 +19,7 @@ def show_pages(page0):
     root.iconify = True
     root.resizable = True
     root.image_names = ['blueyes.png']
-    root0.iconbitmap('images/blueyes.ico')
+    root0.iconbitmap("images/blueyes.ico")
     # Adjust size
     root0.geometry("1530x780")
 
