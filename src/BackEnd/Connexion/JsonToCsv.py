@@ -2,32 +2,22 @@
 import json
 import csv
 class JsonToCsv(object):
-
-
   @staticmethod
   def convert(jsonfile_, csvfile_):
-   with open(jsonfile_) as file0:
-      file1 = json.load(file0)
 
-      # now we will open a file for writing
-      data_file = open(csvfile_, 'w')
 
-      # create the csv writer object
-      csv_writer = csv.writer(data_file)
 
-      # Counter variable used for writing
-      # headers to the CSV file
-      count = 0
+   with open(jsonfile_) as json_file:
+      jsondata = json.load(json_file)
+      data_file = open(csvfile_, 'w', newline='')
+   csv_writer = csv.writer(data_file)
 
-      for emp in file1:
-       if count == 0:
-
-        # Writing headers of CSV file
-        header = emp.keys()
+   count = 0
+   for data in jsondata:
+    if count == 0:
+        header = data.keys()
         csv_writer.writerow(header)
         count += 1
+        csv_writer.writerow(data.values())
 
-       # Writing data of CSV file
-       csv_writer.writerow(emp.values())
-
-       data_file.close()
+    data_file.close()

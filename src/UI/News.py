@@ -2,6 +2,7 @@ import json
 import tkinter
 from tkinter import TOP
 
+from src.BackEnd.Connexion.JsonToCsv import JsonToCsv
 from src.BackEnd.Connexion.RequestHandler import RequestHandler
 
 
@@ -16,10 +17,20 @@ class News(object):
 
     @staticmethod
     def get() -> object:
-        urls = "http://nfs.faireconomy.media/ff_calendar_thisweek.json?version=74f11aed5c03a2a90fca2a09a68e03b9"
+        urls = "http://nfs.faireconomy.media"
 
-        r =RequestHandler(url0=urls). make_request()
-        return json.loads(r)
+        r =RequestHandler(url0=urls,api_key='')
+        data=r.make_request(path='/ff_calendar_thisweek.json?version=74f11aed5c03a2a90fca2a09a68e03b9')
+
+        print('News feed'+ data.__str__())
+
+
+
+        with open("News.json", "w") as outfile: json.dump(data, outfile,sort_keys=True,indent=2)
+
+        JsonToCsv().convert('News.json','News.csv')
+
+        return data
 
     @classmethod
     def show(cls) -> None:

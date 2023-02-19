@@ -11,21 +11,10 @@ class Oanda:
 
         self.req=RequestHandler(api_key=api_key0,url0='https://api-fxtrade.oanda.com')
 
-
-
-
    def create(self): return
-
-
    def trade(self): return
-
-
    def order(self): return
-
-
    def run(self): return
-
-
    def update(self): return
 
 
@@ -38,7 +27,5 @@ class Oanda:
 
    def get_account(self ):
        da=self.req.make_request(path='/v3/account/'+account_id)
-
-
 
        return da

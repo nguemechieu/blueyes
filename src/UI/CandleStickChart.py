@@ -4,9 +4,7 @@ from tkinter import Canvas
 
 import matplotlib.pyplot as plt
 import pandas as pd
-from numpy import double
 
-from src.BackEnd.Connexion.JsonToCsv import JsonToCsv
 from src.BackEnd.Connexion.Oanda import Oanda, account_id, api_key0
 
 
@@ -44,7 +42,7 @@ r= Oanda(account_id_=account_id,api_key=api_key0)
 data=r.get_candles_data('EUR_USD')
 
 with open("data.json", "w") as outfile:
-        json.dump(data, outfile,sort_keys=True,indent=2)
+    json.dump(data, outfile,sort_keys=True,indent=2)
 
 with open('data.json') as json_file:
     dat= json.load(json_file)
@@ -100,15 +98,15 @@ for j, value in mid1.items():
     print(j, value)
 
     if j == 'o':
-     xopen=value
+        xopen=value
 
     if j == 'h':
-     xhigh=value
+        xhigh=value
     if j == 'l':
-     xlow=value
+        xlow=value
     if j == 'c':
 
-     xclose=value
+        xclose=value
 
 
 # Saving data to list params
@@ -160,7 +158,7 @@ print(open_list + high_list + low_list + close_list)
 
 prices=pd.read_csv('data3.csv')
 
- # define up and down prices
+# define up and down prices
 
 
 
@@ -169,14 +167,14 @@ down = prices[prices.Open < prices.Open]
 
 print(prices)
 prices=pd.DataFrame({'Open': openvar,
-                               'Close': closevar,
-                               'High': highvar,
-                               'Low': lowvar},
-                              index=pd.date_range("2015-02-17", periods=8, freq="d"))
+                     'Close': closevar,
+                     'High': highvar,
+                     'Low': lowvar},
+                    index=pd.date_range("2015-02-17", periods=8, freq="d"))
 
-        # display DataFrame
+# display DataFrame
 
-        # define colors to use
+# define colors to use
 col1 = 'green'
 col2 = 'red'
 

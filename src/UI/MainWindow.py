@@ -5,7 +5,8 @@ import tkinter
 from tkinter import filedialog, BOTTOM, LEFT, X, TOP
 from tkinter.filedialog import Open, SaveAs
 from typing import Type
-from src.UI.CandleStickChart import CandleStickChart
+from src.UI.CandleStickChart import  candle_stick_chart
+
 
 def get_new_window():
     pass
@@ -216,7 +217,7 @@ class MainWindow(object):
 
 
 
-        CandleStickChart(root)
+        candle_stick_chart(root=root)
 
 
 
@@ -255,7 +256,7 @@ def open_account(root):
     frame = tkinter.Frame(root)
     frame.pack(side=LEFT, ipadx=2, ipady=3)
 
-    CandleStickChart(root)
+    candle_stick_chart(root)
 
     pass
 
