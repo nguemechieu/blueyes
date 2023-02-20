@@ -1,13 +1,12 @@
 
 # Blueyes
-[![Build Status](https://github.com/nguemechhieu/blueyes)] 
-![Icons](https://github.com/nguemechhieu/blueyes/blob/master/src/images/blueyes.png)
+![Build Status](https://github.com/nguemechhieu/blueyes)  
+![Icons](https://github.com/nguemechieu/blueyes/blob/master/src/images/blueyes.png)
 # Welcome to Blueyes
 
 ## License Agreement MIT License
 ## Copyright (c) 2023 Blueyes. All rights reserved
 ### Description:
-
      Blueyes is a financial and investment software developed TechExpert-Solution.Inc
      It main purpose is to provide financial support ,investment services and trading
 #
@@ -28,4 +27,4 @@
  
 # Errors Report
 
- [link](https://github.com/nguemechieu/blueyes/blog/master/issues)
+ Link :https://github.com/nguemechieu/blueyes/blog/master/issues
