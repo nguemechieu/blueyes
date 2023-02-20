@@ -1,6 +1,8 @@
+import logging
+
 import pandas as pd
 
-
+logger = logging.getLogger(__name__)
 class CoinbasePro:
     def __init__(self, api_key, username, password, api_secret, pass_phrase):
         self.user = username

@@ -131,7 +131,7 @@ Liechtenstein,LI
 Lithuania,LT
 Luxembourg,LU
 Macao,MO
-"Macedonia, the Former Yugoslav Republic of",MK
+Macedonia, the Former Yugoslav Republic of,MK
 Madagascar,MG
 Malawi,MW
 Malaysia,MY
@@ -144,8 +144,8 @@ Mauritania,MR
 Mauritius,MU
 Mayotte,YT
 Mexico,MX
-"Micronesia, Federated States of",FM
-"Moldova, Republic of",MD
+Micronesia, Federated States of,FM
+Moldova, Republic of,MD
 Monaco,MC
 Mongolia,MN
 Montenegro,ME
@@ -169,7 +169,7 @@ Norway,NO
 Oman,OM
 Pakistan,PK
 Palau,PW
-"Palestine, State of",PS
+Palestine, State of,PS
 Panama,PA
 Papua New Guinea,PG
 Paraguay,PY

@@ -1,4 +1,5 @@
 import glob
+import logging
 import os
 import random
 import tkinter
@@ -8,32 +9,36 @@ from typing import Type
 
 import pandas as pd
 
-from src.UI.CandleStickChart import CandleStickChart
-
-global i, colors, buy_sell_btn, toolbar2
+global i, colors, buy_sell_btn,timeframe_btn_list, hy, xcolor, toolbar2
+logger = logging.getLogger(__name__)
 def get_new_window():
     pass
-class MainWindow(object):
+
+class MainWindow:
     def __init__(self, root:tkinter.Tk=None):
 
-        global toolbar2, timeframe_btn_list, hy, xcolor
+
+
+        global toolbar2_, hy, hyl, toolbar, timeframe_btn_list_
         self.root = root
         # Settings main window
 
         # Initialize the database
-        xcolor = 'black'
+        xcolor_ = 'black'
 
         # Create a Menu
-        root0 = root
-        win_dow = tkinter.Frame(root0)
+
+        win_dow = tkinter.Frame(self.root)
 
         win_dow.rowconfigure(0, weight=1)
         win_dow.columnconfigure(0, weight=1)
 
         win_dow.bbox(row=6, column=3)
+        canvas= tkinter.Canvas(master=self.root, takefocus=3, bg='black', borderwidth=1000, border=12, width=1000, height=500, selectbackground='blue')
+        canvas.pack()
 
-        menu_bar = tkinter.Menu(win_dow, border=30)
-        root0.config(menu=menu_bar, padx=8, takefocus=9)  # menu bar
+        menu_bar = tkinter.Menu(self.root, border=30)
+        self.root.config(menu=menu_bar, padx=8, takefocus=9)  # menu bar
         file_menu0 = tkinter.Menu(menu_bar, tearoff=0)
         menu_bar.add_cascade(label="File", menu=file_menu0)
         file_menu0.add_command(label="New Chart")
@@ -42,9 +47,7 @@ class MainWindow(object):
         profiles_menu0.add_separator()
         profiles_menu0.add_command(label="Previous")
         profiles_menu0.add_separator()
-
         profiles_menu0.add_command(label="Save As", command=SaveAs)
-
         file_menu0.add_separator()
         file_menu0.add_command(label="Market Overview", command=lambda: market_overview)
         file_menu0.add_separator()
@@ -58,7 +61,6 @@ class MainWindow(object):
         file_menu0.add_separator()
 
         file_menu0.add_command(label="Login to Trade", command=lambda: login_to_trade, compound='left')
-
         file_menu0.add_command(label="Open a new account", command=lambda: open_account(root=win_dow), compound='left')
         file_menu0.add_separator()
         file_menu0.add_command(label="Open Data Folder",
@@ -103,11 +105,11 @@ class MainWindow(object):
 
         file_menu2.add_cascade(label="Indicators", menu=indicator_menu)
         file_menu2.add_separator()
-        file_menu2.add_command(label="Title ")
+        file_menu2.add_command(label="mv ")
         file_menu2.add_separator()
-        file_menu2.add_command(label="Title ")
+        file_menu2.add_command(label="cci ")
         file_menu2.add_separator()
-        file_menu2.add_command(label="Title ")
+        file_menu2.add_command(label="TR ")
         file_menu2.add_separator()
         file_menu2.add_command(label="Ca")
 
@@ -165,50 +167,44 @@ class MainWindow(object):
         file_menu7.add_command(label="Info's")
         menu_bar.add_cascade(label="About", menu=file_menu7)
 
+
         # Creating and displaying label for toolbar
 
         time_frame=pd.read_csv( "oanda__granularity.csv")
 
-        print("\n================================\n" + str(time_frame.keys()) +"================================\n")
-
-        _list  =time_frame.items()
-        for hy in _list: print("\n================================\n" + str(hy))
-
-        timeframe_btn_list = tkinter.Button(root,text=str(hy))
+        print("\n================================\n" + str(time_frame.items()))
 
 
 
+        for hyl in time_frame:
+           print("\n================================\n" + str(hyl))
+
+           timeframe_btn_list_ = tkinter.Button(self.root, text=str(hyl))
+           toolbar = tkinter.Frame(root, takefocus=2, border=2, background='blue' )
+           toolbar.pack(side=TOP, ipadx=2)
+           timeframe_btn_list_=[timeframe_btn_list_]
 
 
-
-        # Create sub window
-
-        toolbar = tkinter.Frame(root, relief="raised", takefocus=2, border=2, background='blue'
-
-                                )
-        toolbar.pack(side=TOP, ipadx=2)
-        for timeframe in str(timeframe_btn_list):
-
-
+        for timeframe in timeframe_btn_list_:
             colors_ = ['green', 'yellow', 'red', 'blue', 'orange', 'purple', 'brown', 'yellow', 'lime', 'gold']
             x0 = int(random.random() * 10)
             if x0 < 10:
-                xcolor = colors_[x0]
-            timeframe_btn = tkinter.Button(toolbar, text=str(timeframe), border=2, height=2, width=2, background=xcolor)
+                xcolor_ = colors_[x0]
+            timeframe_btn = tkinter.Button(toolbar, text=str(timeframe), border=2, height=2, width=2, background=xcolor_)
 
             if timeframe == 'Zoom -':
-                timeframe_btn = tkinter.Button(toolbar, text=timeframe, border=2, height=2, width=2,
+                timeframe_btn = tkinter.Button(toolbar, text='ZOOM', border=2, height=2, width=2,
                                                bitmap='/src/images/folder.png',
-                                               background=xcolor)
+                                               background=xcolor_)
             timeframe_btn.pack(side=LEFT, fill=X, ipadx=2, padx=2, pady=2)
 
-            # tkinter.Label(sub_window, text="Position 1 : x=0, y=0", bg="#FFFF00", fg="white").place(x=5, y=0)
-            # tkinter.Label(sub_window, text="Position 2 : x=50, y=40", bg="#3300CC", fg="white").place(x=50, y=40)
-            # tkinter.Label(sub_window, text="Position 3 : x=75, y=80", bg="#FF0099", fg="white").place(x=75, y=80)
+            tkinter.Label(root, text="Position 1 : x=0, y=0", bg="#FFFF00", fg="white").place(x=5, y=0)
+            tkinter.Label(root, text="Position 2 : x=50, y=40", bg="#3300CC", fg="white").place(x=50, y=40)
+            tkinter.Label(root, text="Position 3 : x=75, y=80", bg="#FF0099", fg="white").place(x=75, y=80)
 
             # Create toolbar for managing candle stick events and trades
-            toolbar2 = tkinter.Frame(root, borderwidth=2, height=2, padx=2, pady=2, highlightcolor='black')
-            toolbar2.pack(side=BOTTOM, ipadx=2, padx=2, pady=2, expand=3, ipady=2)
+            toolbar2_ = tkinter.Frame(root, borderwidth=2, height=2, padx=2, pady=2, highlightcolor='black')
+            toolbar2_.pack(side=BOTTOM, ipadx=2, padx=2, pady=2, expand=3, ipady=2)
 
         btn_list = ['BUY', 'SELL', 'Trailing Buy', 'Trailing Sell', 'Close All']
 
@@ -217,9 +213,9 @@ class MainWindow(object):
             x0 = int(random.random() * 10)
 
             if x0 < 10:
-                xcolor = colors_[x0]
+                xcolor_ = colors_[x0]
 
-                buy_sell_btn_ = tkinter.Button(toolbar2, text=i__, background=xcolor,
+                buy_sell_btn_ = tkinter.Button(toolbar2_, text=i__, background=xcolor_,
                                                relief='raised',
                                                border=2, width=2,
                                                padx=3, pady=2,
@@ -228,7 +224,11 @@ class MainWindow(object):
                 buy_sell_btn_.pack(side=LEFT, ipadx=2, ipady=2, padx=2)
 
 
-        CandleStickChart(root=root)
+
+
+
+
+
 
 
 
@@ -268,7 +268,6 @@ def open_account(root):
     frame = tkinter.Frame(root)
     frame.pack(side=LEFT, ipadx=2, ipady=3)
 
-    CandleStickChart(root)
 
     pass
 
@@ -366,6 +365,8 @@ def get_open_data_folder() -> Type[Open]:
 
 def callback():
     print("called the callback!")
+
+    pass
 
 # --------------------------------
 ################################

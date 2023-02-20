@@ -1,9 +1,10 @@
+import logging
 import tkinter
 from tkinter import *
 from tkinter import messagebox
 
 from src.Db import Db
-
+logger = logging.getLogger(__name__)
 
 class Registration:
 

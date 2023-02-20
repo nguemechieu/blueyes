@@ -1,19 +1,27 @@
+
 import logging
-import sys
+
 from src.UI.LoginFrame import show_pages
+from src.UI.News import News
+
 # Create and configure logger
 logging.basicConfig(filename="blueyes.log", format='%(asctime)s %(message)s', filemode='w')
 # Creating an object
 __name___ = 'LoginFrame'
-logging.getLogger(__name___)
+
+# Creating an object
+logger = logging.getLogger()
+
+# Setting the threshold of logger to DEBUG
+logger.setLevel(logging.DEBUG)
+
+news=News()
+news.get()
 
 # Using the special variable
 # __name__
 if __name__ == "__main__":
-  logging.info('Creating a new LoginFrame')
-  show_pages('Login')
-else: # __main__ is not defined
+ logger.debug("Blueyes is starting...")
 
-    logging.info('Main is exiting')
-
-    sys.exit()
+ show_pages('Login')
+ curses.endwin() #Close screen

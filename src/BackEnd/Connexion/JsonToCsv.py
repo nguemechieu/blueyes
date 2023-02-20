@@ -1,10 +1,12 @@
 import csv
+import io
 import json
 import logging
+import sys
 
 import pandas as pd
 
-
+logger = logging.getLogger(__name__)
 def read_json(filename_: str) -> dict:
     try:
         with open(filename_, "r") as f:
@@ -124,120 +126,88 @@ def write_to_file(data: str, filepath: str) -> int:
         raise Exception(f"Saving data to {filepath} encountered an error")
 
 
-def json_to_csv(json_file_name:str=None, csv_file_name:str=None):
-    # Read the JSON file as python dictionary
+def to_string(s):
+ try:
+     return str(s)
 
-    global filename, fields, data_print, mydict
-    json_data = read_json(filename_=json_file_name)
-
-    # Normalize the nested python dict
-
-    print("Normalize the nested python dict ".format(json_data))
-
-    new_data = normalize_json(data=json_data)
-
-    print("Checking data type...")
-
-    if type(new_data) == dict or type(new_data) == list:
-      print("Mode array  ON...")
-      for key in new_data:
-        count = 0
-        for k_value in key:
-            print("Attribute key name  " + str(k_value))
+ except :
+     #Change the encoding type if needed
+     return s.encode('utf-8')
 
 
-            print("Checking type  " + str( type(key.get(k_value))))
-            print("Checking key " + str(key))
-            print("Writing fields")
-            fields =[ str(k_value)]
-            print("Field Name "+ str( fields))
-            print("Field value(s) "+ str( fields))
-            print("Writing column values "+ str( key.get(k_value)))
-            row = [ str(k_value)]
-            column = [  key.get(k_value)]
-            count += 1
-            print("Setting rows and column data rows["+str(count)+"]"+"X["+str(count+1 ) +"]"+  "\n" +str(row)+"  "+str(column) + str())
-            logging.info("Setting rows and column data rows["+str(count)+"]"+"X["+str(count+1 ) +"]"+  "\n" +str(row)+"  "+str(column) + str())
+class JsonToCsv:
+   def __init__(self):
+    self.reduced_item = None
+    self.key = None
 
-            print("Writing column values "+ str(column) )
-
-            [data_print ]= k_value.__str__() + ':'+  key.get(k_value).__str__()
-
-            if k_value == key:
-               print("Writing column2 values "+ str(column))
-               mydict  = str('{'+data_print+'}')
-               print("Writing values "+ str(mydict))
-
-            filename = "data3.csv"
-            # writing to csv file
-            with open(filename, 'w') as csvfile:
-
-             #creating a csv dict writer object
-             writer = csv.DictWriter(csvfile, fieldnames = fields)
-
-             # writing headers (field names)
-             writer.writeheader()
-
-             # writing data rows
-             writer.writerows(str(mydict))
+   def encode(self, param):
+     pass
 
 
+   def reduce_item(self, key, value):
 
 
+     #Reduction Condition 1
+     if type(value) is list:
+
+         i_=0
+         for sub_item in value:
+             self.reduce_item(key + '_' + to_string(i_), sub_item)
+             i_= i_ + 1
+
+     #Reduction Condition 2
+     elif type(value) is dict:
+        sub_keys = value.keys()
+        for sub_key in sub_keys:
+            self.reduce_item(key + '_' + to_string(sub_key), value[sub_key])
+     #Base Condition
+     else:
+            self.reduced_item[to_string(key)] = to_string(value)
+
+   def convert(self,json_filename=None, csv_filename=None)->None:
+     if len(sys.argv) != 4:
+        print ("\nUsage: python json_to_csv.py <node> <json_in_file_path> <csv_out_file_path>\n")
+        logger.info("\"Usage: python "+json_filename +"<node> <json_in_file_path> <"+csv_filename+">")
+
+     else:
+        #Reading arguments
+        node = sys.argv[1]
+        json_file_path = sys.argv[2]
+        csv_file_path = sys.argv[3]
+
+        with io.open(json_file_path, 'r', encoding='utf-8-sig') as fp:
+            json_value = fp.read()
+            raw_data = json.loads(json_value)
+
+        try:
+            data_to_be_processed = raw_data[node]
 
 
-    else :
+        except:
+            data_to_be_processed = raw_data
 
-        print("Mode array OFF...")
-        for key in new_data:
-         for value in key:
-            print("Checking value  " + str(value))
-            print("Checking type  " + str( type(value)))
-            print("Checking key " + str(key))
-            print("Writing fields")
-            fields =[ str(value)]
-            print("Field 1 "+ str( fields))
-            print("Writing column values "+ str( fields))
+        processed_data = []
+        header = []
+        for item in data_to_be_processed:
+            reduced_item_ = {}
+            self.reduce_item(node, item)
 
+            header += reduced_item_.keys()
 
-            if  check_data_type(key) =="List" or check_data_type(key)==[]:
-                print("Sub rows found ...")
-                print("Checking sub rows values " + str(value))
+            processed_data.append(reduced_item_)
 
-                for field  in value:
+        header = list(set(header))
+        header.sort()
 
-                    print("Checking value " + str(field))
+        with open(csv_file_path, 'w+') as f:
+            writer = csv.DictWriter(f, header, quoting=csv.QUOTE_ALL)
+            writer.writeheader()
+            for row in processed_data:
+                writer.writerow(row)
 
-                    [dat]= field
-
-
-                    print("Checking type " + str(type(value)))
-
-                    for val in key[value]:
-                        print("Checking val " + str(val))
-                        g=[val]
-                        print()
-
-
-
-
-            else:
-                print("No sub rows values found")
-
-
-
-
-
-
-                for field in value:
-
-                 print("Checking value " + str(field))
-
-                 dat= field
-                 print("Checking type " + str(type(dat)))
-
-                 print("dat " +dat)
-
+        print ("Just completed writing csv file with %d columns" % len(header))
+        logger.info("Writing csv file with %d columns" % len(header))
+        # Read the JSON file as python dictionary
 
 
 

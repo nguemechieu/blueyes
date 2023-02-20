@@ -63,8 +63,12 @@ class Oanda:
    # "triggerCondition": "TRIGGER_DEFAULT",
    # "type": "MARKET_IF_TOUCHED",
    # "units": "10000"
+ def get_stream_price(self,instrument  ):
+     path_= "/v3/accounts/"+account_id+"/pricing/stream?instruments="+instrument
 
 
+
+     return self.req.make_request_(url="https://stream-fxtrade.oanda.com",path=path_)
 
 
 

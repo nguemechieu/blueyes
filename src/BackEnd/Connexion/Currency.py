@@ -1,3 +1,6 @@
+import logging
+
+logger = logging.getLogger(__name__)
 class Currency(object):
 
     def __init__(self, name, _id, full_name, central_bank, country, fraction_digits):

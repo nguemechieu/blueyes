@@ -1,4 +1,5 @@
 import datetime
+import logging
 import tkinter
 
 from tkinter import Label, messagebox, X, Tk
@@ -7,6 +8,7 @@ from src.Db import Db
 from src.UI import ResetPassword, Registration
 from src.UI.ForgotPassword import ForgotPassword
 from src.UI.MainWindow import MainWindow
+logger = logging.getLogger(__name__)
 class UpdatePassword:
     pass
 def show_pages(page0):
@@ -53,7 +55,7 @@ def show_pages(page0):
         root.resizable = True
         root0.image_names = ['blueyes.png']
         root0.iconbitmap('images/blueyes.ico')
-        bgf = tkinter.PhotoImage(file='images/blueyes.png')
+
         r = LoginFrame(root=root)
 
         r.remember__me = False
@@ -83,7 +85,8 @@ def validate_login(user_: str ='', pwd_: str=''):
             db_username_ = row[1]
             db_password_ = row[5]
     except Exception as ep:
-             messagebox.showerror('Error', ep)
+             messagebox.showerror('Error',str (ep))
+             logger.error('Error creating user' +ep.__str__())
 
     if user_ == "":
         warn_ = "Username can't be empty"
