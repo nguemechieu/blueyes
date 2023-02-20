@@ -5,22 +5,22 @@ import tkinter
 from tkinter import filedialog, BOTTOM, LEFT, X, TOP
 from tkinter.filedialog import Open, SaveAs
 from typing import Type
-from src.UI.CandleStickChart import  candle_stick_chart
 
+import pandas as pd
 
+from src.UI.CandleStickChart import CandleStickChart
+
+global i, colors, buy_sell_btn, toolbar2
 def get_new_window():
     pass
 class MainWindow(object):
-
     def __init__(self, root:tkinter.Tk=None):
 
+        global toolbar2, timeframe_btn_list, hy, xcolor
         self.root = root
         # Settings main window
 
         # Initialize the database
-
-        global i, colors, buy_sell_btn, toolbar2
-
         xcolor = 'black'
 
         # Create a Menu
@@ -79,8 +79,10 @@ class MainWindow(object):
         file_menu1.add_command(label="Title Vertical Window", command=lambda: title_vertical_window)
         file_menu1.add_separator()
         file_menu1.add_command(label="Cascade View", command=lambda: cascade_view_window)
+
         file_menu2 = tkinter.Menu(menu_bar, tearoff=0)
         menu_bar.add_cascade(label="Insert", menu=file_menu2)
+
         indicator_menu = tkinter.Menu(menu_bar, tearoff=0)
         indicator_menu.add_command(label="Accelerator Oscillator")
         indicator_menu.add_command(label="Accumulation /Distribution")
@@ -164,10 +166,20 @@ class MainWindow(object):
         menu_bar.add_cascade(label="About", menu=file_menu7)
 
         # Creating and displaying label for toolbar
-        timeframe_btn_list = ['M1', 'M5', 'M15', 'M30', 'H1', 'H2', 'H4', 'H6', 'H12', 'W', 'M', 'Y',
-                              'Zoom -', 'Zoom +', 'Candle Stick', 'Line', 'Strategy tester'
 
-                              ]
+        time_frame=pd.read_csv( "oanda__granularity.csv")
+
+        print("\n================================\n" + str(time_frame.keys()) +"================================\n")
+
+        _list  =time_frame.items()
+        for hy in _list: print("\n================================\n" + str(hy))
+
+        timeframe_btn_list = tkinter.Button(root,text=str(hy))
+
+
+
+
+
 
         # Create sub window
 
@@ -175,14 +187,16 @@ class MainWindow(object):
 
                                 )
         toolbar.pack(side=TOP, ipadx=2)
-        for timeframe in timeframe_btn_list:
-            colors = ['green', 'yellow', 'red', 'blue', 'orange', 'purple', 'brown', 'yellow', 'lime', 'gold']
+        for timeframe in str(timeframe_btn_list):
+
+
+            colors_ = ['green', 'yellow', 'red', 'blue', 'orange', 'purple', 'brown', 'yellow', 'lime', 'gold']
             x0 = int(random.random() * 10)
             if x0 < 10:
-                xcolor = colors[x0]
-            timeframe_btn = tkinter.Button(toolbar, text=timeframe, border=2, height=2, width=2, background=xcolor)
+                xcolor = colors_[x0]
+            timeframe_btn = tkinter.Button(toolbar, text=str(timeframe), border=2, height=2, width=2, background=xcolor)
 
-            if timeframe_btn_list.index(timeframe) == 'Zoom -':
+            if timeframe == 'Zoom -':
                 timeframe_btn = tkinter.Button(toolbar, text=timeframe, border=2, height=2, width=2,
                                                bitmap='/src/images/folder.png',
                                                background=xcolor)
@@ -198,26 +212,24 @@ class MainWindow(object):
 
         btn_list = ['BUY', 'SELL', 'Trailing Buy', 'Trailing Sell', 'Close All']
 
-        for i in btn_list:
-            colors = ['green', 'yellow', 'red', 'blue', 'orange', 'purple', 'brown', 'yellow', 'lime', 'gold']
+        for i__ in btn_list:
+            colors_ = ['green', 'yellow', 'red', 'blue', 'orange', 'purple', 'brown', 'yellow', 'lime', 'gold']
             x0 = int(random.random() * 10)
 
             if x0 < 10:
-                xcolor = colors[x0]
+                xcolor = colors_[x0]
 
-                buy_sell_btn = tkinter.Button(toolbar2, text=i, background=xcolor,
-                                              relief='raised',
-                                              border=2, width=2,
-                                              padx=3, pady=2,
-                                              takefocus=3,
-                                              justify='center')
-                buy_sell_btn.pack(side=LEFT, ipadx=2, ipady=2, padx=2)
-
-
+                buy_sell_btn_ = tkinter.Button(toolbar2, text=i__, background=xcolor,
+                                               relief='raised',
+                                               border=2, width=2,
+                                               padx=3, pady=2,
+                                               takefocus=3,
+                                               justify='center')
+                buy_sell_btn_.pack(side=LEFT, ipadx=2, ipady=2, padx=2)
 
 
+        CandleStickChart(root=root)
 
-        candle_stick_chart(root=root)
 
 
 
@@ -256,7 +268,7 @@ def open_account(root):
     frame = tkinter.Frame(root)
     frame.pack(side=LEFT, ipadx=2, ipady=3)
 
-    candle_stick_chart(root)
+    CandleStickChart(root)
 
     pass
 
@@ -332,16 +344,16 @@ def get_rsi():
     pass
 
 
-def get_about_us(self):
+def get_about_us():
     pass
 
 
 def dic_imgs():
     imgss = {}
-    for i in glob.glob("images/*.png"):
-        pathfile = i
-        i = os.path.basename(i)
-        name = i.split(".")[0]
+    for df in glob.glob("images/*.png"):
+        pathfile = df
+        df = os.path.basename(df)
+        name = df.split(".")[0]
         imgss[name] = tkinter.PhotoImage(file=pathfile)
         if name == "folder":
             imgss[name] = imgss[name].subsample(2)

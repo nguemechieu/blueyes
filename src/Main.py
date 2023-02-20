@@ -3,7 +3,6 @@ import sys
 from src.UI.LoginFrame import show_pages
 # Create and configure logger
 logging.basicConfig(filename="blueyes.log", format='%(asctime)s %(message)s', filemode='w')
-
 # Creating an object
 __name___ = 'LoginFrame'
 logging.getLogger(__name___)
